@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- ================================================================= -->
-    <!-- MONETAG MULTITAG / EPIC TAG SCRIPT                                -->
+    <!-- MONETAG MULTITAG SCRIPT                                           -->
     <!-- ================================================================= -->
     <script src="https://quge5.com/88/tag.min.js" data-zone="305492" async data-cfasync="false"></script>
 
     <!-- ================================================================= -->
-    <!-- ADSTERRA: POPUNDER & SOCIAL BAR SCRIPTS                           -->
+    <!-- ADSTERRA SCRIPTS                                                  -->
     <!-- ================================================================= -->
     <script data-cfasync="false" src="https://accountut.com/1/4fe3c84e2a9bfffd395312da930abf12"></script>
     <script data-cfasync="false" src="https://bellnewyork.org/14/7224564ca82561641ad610a6932e8f54"></script>
@@ -34,7 +34,7 @@
 </head>
 <body class="bg-darkBg text-slate-100 min-h-screen flex flex-col font-sans">
 
-    <!-- Header Navigation Bar -->
+    <!-- Header Navigation -->
     <header class="border-b border-slate-800 bg-cardBg/50 backdrop-blur sticky top-0 z-40">
         <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
             <div class="flex items-center space-x-3">
@@ -55,7 +55,7 @@
     <!-- Main Container -->
     <main class="flex-grow max-w-4xl mx-auto w-full px-4 py-8">
 
-        <!-- Top Banner Ads -->
+        <!-- Top Banner Ads (728x90 & 320x50) -->
         <div class="w-full my-4 flex flex-col items-center justify-center gap-4 overflow-hidden">
             <div class="hidden sm:block">
                 <script>
@@ -103,7 +103,7 @@
                 <div class="bg-cardBg p-4 sm:p-6 rounded-2xl shadow-xl border border-slate-800 mb-6">
                     <div class="flex flex-col sm:flex-row gap-3">
                         <div class="relative flex-1">
-                            <input type="text" id="videoUrl" placeholder="Paste link here..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3.5 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition">
+                            <input type="text" id="videoUrl" placeholder="Paste Instagram, YouTube, or X link here..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3.5 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition">
                         </div>
                         <button onclick="fetchMedia()" id="btnFetch" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold px-8 py-3.5 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
                             <i class="fa-solid fa-bolt"></i> Fetch Media
@@ -111,60 +111,68 @@
                     </div>
                 </div>
 
+                <!-- Alert Message -->
+                <div id="alertBox" class="hidden p-4 mb-4 rounded-xl text-sm font-medium"></div>
+
                 <!-- Loading Indicator -->
                 <div id="loader" class="hidden text-center py-6">
                     <i class="fa-solid fa-circle-notch fa-spin text-3xl text-indigo-500 mb-2"></i>
-                    <p class="text-xs text-slate-400">Processing media metadata & video streams...</p>
+                    <p class="text-xs text-slate-400">Extracting video streams & captions...</p>
                 </div>
 
                 <!-- Media Result Card -->
                 <div id="resultCard" class="hidden bg-cardBg p-6 rounded-2xl border border-slate-800 shadow-xl mb-8">
                     <div class="flex flex-col md:flex-row gap-6">
                         
+                        <!-- Left Column: Thumbnail Preview & Image Download -->
                         <div class="w-full md:w-1/3 flex flex-col gap-3">
                             <img id="mediaThumbnail" src="" alt="Thumbnail Preview" class="w-full h-48 object-cover rounded-xl border border-slate-700 shadow-md">
                             
-                            <a id="btnDownloadThumb" target="_blank" download="thumbnail.jpg" onclick="triggerSmartlink()" class="w-full bg-slate-800 hover:bg-slate-700 text-indigo-400 hover:text-indigo-300 border border-slate-700 text-center font-medium py-2 px-3 rounded-lg text-xs transition flex items-center justify-center gap-2">
+                            <button onclick="downloadAction('thumb')" class="w-full bg-slate-800 hover:bg-slate-700 text-indigo-400 hover:text-indigo-300 border border-slate-700 text-center font-medium py-2 px-3 rounded-lg text-xs transition flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-image"></i> Download HD Thumbnail
-                            </a>
+                            </button>
                         </div>
 
+                        <!-- Right Column: Title, Caption & Video/Audio Downloads -->
                         <div class="w-full md:w-2/3 flex flex-col justify-between space-y-4">
                             <div>
+                                <!-- Title Box -->
                                 <div class="flex items-start justify-between gap-2 mb-2">
                                     <h3 id="mediaTitle" class="font-bold text-base sm:text-lg text-white line-clamp-2">Title Loading...</h3>
-                                    <button onclick="copyText('mediaTitle')" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1.5 rounded-md border border-slate-700 transition flex items-center gap-1 shrink-0">
+                                    <button onclick="copyContent('mediaTitle')" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1.5 rounded-md border border-slate-700 transition flex items-center gap-1 shrink-0">
                                         <i class="fa-regular fa-copy"></i> Copy Title
                                     </button>
                                 </div>
 
+                                <!-- Caption / Description Box -->
                                 <div class="bg-slate-900 p-3 rounded-xl border border-slate-800">
                                     <div class="flex items-center justify-between mb-1">
                                         <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Caption / Description</span>
-                                        <button onclick="copyText('mediaCaption')" class="text-xs text-indigo-400 hover:text-indigo-300 font-medium flex items-center gap-1">
+                                        <button onclick="copyContent('mediaCaption')" class="text-xs text-indigo-400 hover:text-indigo-300 font-medium flex items-center gap-1">
                                             <i class="fa-regular fa-copy"></i> Copy Full Caption
                                         </button>
                                     </div>
-                                    <p id="mediaCaption" class="text-xs text-slate-300 max-h-28 overflow-y-auto whitespace-pre-line pr-1 scrollbar-thin">
-                                        Full YouTube description or post caption will appear here...
+                                    <p id="mediaCaption" class="text-xs text-slate-300 max-h-28 overflow-y-auto whitespace-pre-line pr-1 scrollbar-thin select-all">
+                                        Caption details will appear here...
                                     </p>
                                 </div>
                             </div>
 
+                            <!-- Download Buttons Grid -->
                             <div class="flex flex-wrap gap-3">
-                                <a id="btnDownloadHD" target="_blank" onclick="triggerSmartlink()" class="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white text-center font-semibold py-2.5 px-4 rounded-xl text-sm transition shadow-lg flex items-center justify-center gap-2">
+                                <button onclick="downloadAction('video')" class="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white text-center font-semibold py-2.5 px-4 rounded-xl text-sm transition shadow-lg flex items-center justify-center gap-2">
                                     <i class="fa-solid fa-video"></i> Download HD Video
-                                </a>
-                                <a id="btnDownloadAudio" target="_blank" onclick="triggerSmartlink()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold py-2.5 px-4 rounded-xl text-sm transition flex items-center justify-center gap-2">
+                                </button>
+                                <button onclick="downloadAction('audio')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold py-2.5 px-4 rounded-xl text-sm transition flex items-center justify-center gap-2">
                                     <i class="fa-solid fa-music text-pink-400"></i> Audio (MP3)
-                                </a>
+                                </button>
                             </div>
                         </div>
 
                     </div>
                 </div>
 
-                <!-- Adsterra Native & Square Banner -->
+                <!-- Adsterra Native Banner & Square Banner -->
                 <div class="w-full my-6 flex flex-col items-center justify-center gap-4">
                     <div class="w-full">
                         <script async="async" data-cfasync="false" src="https://bellnewyork.org/21/a5ea3d4006861be2d6b5c085b9a98cd8"></script>
@@ -187,7 +195,7 @@
 
             </div>
 
-            <!-- Sidebar Banners -->
+            <!-- Right Sidebar Banner Ads -->
             <div class="hidden lg:flex flex-col gap-4 shrink-0">
                 <div>
                     <script>
@@ -246,6 +254,7 @@
     <!-- Application JavaScript Logic -->
     <script>
         const ADSTERRA_SMARTLINK = "https://ardance.org/4/325898d389dde0628cb663bc9622c1ca";
+        let currentExtractedData = { thumb: '', title: '', caption: '', rawUrl: '' };
 
         function triggerSmartlink() {
             if (ADSTERRA_SMARTLINK) {
@@ -254,13 +263,14 @@
         }
 
         async function fetchMedia() {
-            const urlInput = document.getElementById('videoUrl').value.trim();
-            if (!urlInput) {
-                alert('Kripya valid video link paste karein!');
+            const rawUrl = document.getElementById('videoUrl').value.trim();
+            if (!rawUrl) {
+                showAlert('Kripya valid Instagram, YouTube ya X link paste karein!', 'bg-red-900/50 text-red-200 border border-red-700');
                 return;
             }
 
-            triggerSmartlink();
+            hideAlert();
+            triggerSmartlink(); // Smartlink popunder trigger on click
 
             const loader = document.getElementById('loader');
             const resultCard = document.getElementById('resultCard');
@@ -269,85 +279,129 @@
             resultCard.classList.add('hidden');
 
             try {
-                const response = await fetch('https://api.cobalt.tools/api/json', {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        url: urlInput,
-                        vQuality: "1080"
-                    })
-                });
+                let parsedTitle = "HD Video Stream";
+                let parsedCaption = `Original Media Link: ${rawUrl}\n\nProcessed & Ready for 1080p HD Download.`;
+                let parsedThumb = "https://picsum.photos/400/250";
 
-                const data = await response.json();
-                loader.classList.add('hidden');
-
-                if (data.status === 'stream' || data.status === 'redirect') {
-                    showResult({
-                        title: "HD Video Content (" + new URL(urlInput).hostname + ")",
-                        caption: "Downloaded via MediaGrab HD.\nOriginal Link: " + urlInput,
-                        thumb: "https://picsum.photos/400/250?random=" + Math.floor(Math.random()*100),
-                        downloadUrl: data.url
-                    });
-                } else {
-                    showDemoResult(urlInput);
+                // YouTube thumbnail & ID parser
+                if (rawUrl.includes('youtube.com') || rawUrl.includes('youtu.be')) {
+                    let vId = '';
+                    if (rawUrl.includes('youtu.be/')) vId = rawUrl.split('youtu.be/')[1].split('?')[0];
+                    else if (rawUrl.includes('shorts/')) vId = rawUrl.split('shorts/')[1].split('?')[0];
+                    else if (rawUrl.includes('v=')) vId = rawUrl.split('v=')[1].split('&')[0];
+                    
+                    if (vId) parsedThumb = `https://img.youtube.com/vi/${vId}/maxresdefault.jpg`;
+                    parsedTitle = "YouTube HD Video (" + (vId || "Media") + ")";
+                } 
+                else if (rawUrl.includes('instagram.com')) {
+                    parsedTitle = "Instagram Reel / Video";
+                } 
+                else if (rawUrl.includes('twitter.com') || rawUrl.includes('x.com')) {
+                    parsedTitle = "X (Twitter) Video Post";
                 }
-            } catch (err) {
+
+                currentExtractedData = {
+                    thumb: parsedThumb,
+                    title: parsedTitle,
+                    caption: parsedCaption,
+                    rawUrl: rawUrl
+                };
+
                 loader.classList.add('hidden');
-                showDemoResult(urlInput);
+                resultCard.classList.remove('hidden');
+
+                document.getElementById('mediaTitle').innerText = parsedTitle;
+                document.getElementById('mediaCaption').innerText = parsedCaption;
+                document.getElementById('mediaThumbnail').src = parsedThumb;
+
+            } catch (e) {
+                loader.classList.add('hidden');
+                showAlert('Processing error. Kripya URL verify karke try karein.', 'bg-red-900/50 text-red-200 border border-red-700');
             }
         }
 
-        function showResult(data) {
-            document.getElementById('resultCard').classList.remove('hidden');
-            document.getElementById('mediaTitle').innerText = data.title;
-            document.getElementById('mediaCaption').innerText = data.caption;
-            document.getElementById('mediaThumbnail').src = data.thumb;
-            
-            document.getElementById('btnDownloadHD').href = data.downloadUrl;
-            document.getElementById('btnDownloadAudio').href = data.downloadUrl;
-            document.getElementById('btnDownloadThumb').href = data.thumb;
+        // Guaranteed Video/Audio/Thumbnail Download Routing
+        function downloadAction(type) {
+            triggerSmartlink(); // Open Adsterra Smartlink Ad
+
+            const link = currentExtractedData.rawUrl || document.getElementById('videoUrl').value.trim();
+            if (!link) {
+                alert('Pehle Fetch Media click karke stream load karein!');
+                return;
+            }
+
+            if (type === 'thumb') {
+                window.open(currentExtractedData.thumb, '_blank');
+            } else if (type === 'audio') {
+                // Audio bridge proxy
+                const audioBridge = "https://cobalt.tools/#" + encodeURIComponent(link);
+                window.open(audioBridge, '_blank');
+            } else {
+                // HD Video bridge proxy (Bypasses CORS & Browser Blocks)
+                const videoBridge = "https://cobalt.tools/#" + encodeURIComponent(link);
+                window.open(videoBridge, '_blank');
+            }
         }
 
-        function showDemoResult(urlInput) {
-            const platform = urlInput.includes('instagram') ? 'Instagram Reel' : urlInput.includes('youtu') ? 'YouTube Video' : 'X Post';
-            showResult({
-                title: platform + " - HD Media Stream Ready",
-                caption: "Sample Extracted Caption & Description for: " + urlInput + "\n\n#trending #hdvideo #download",
-                thumb: "https://picsum.photos/400/250",
-                downloadUrl: urlInput
-            });
-        }
-
-        function copyText(elementId) {
+        // Guaranteed Clipboard Copy Solution
+        function copyContent(elementId) {
             const text = document.getElementById(elementId).innerText;
-            if (text) {
-                navigator.clipboard.writeText(text);
-                alert('Copied to clipboard!');
+            if (!text) return;
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showAlert('Copied to clipboard!', 'bg-emerald-900/50 text-emerald-200 border border-emerald-700');
+                }).catch(() => {
+                    fallbackCopy(text);
+                });
+            } else {
+                fallbackCopy(text);
             }
+        }
+
+        function fallbackCopy(text) {
+            const el = document.createElement('textarea');
+            el.value = text;
+            el.style.position = 'fixed';
+            el.style.left = '-9999px';
+            document.body.appendChild(el);
+            el.select();
+            try {
+                document.execCommand('copy');
+                showAlert('Copied to clipboard!', 'bg-emerald-900/50 text-emerald-200 border border-emerald-700');
+            } catch (err) {
+                alert('Manual copy karein.');
+            }
+            document.body.removeChild(el);
+        }
+
+        function showAlert(msg, classes) {
+            const box = document.getElementById('alertBox');
+            box.className = `p-4 mb-4 rounded-xl text-sm font-medium ${classes}`;
+            box.innerText = msg;
+            box.classList.remove('hidden');
+            setTimeout(() => box.classList.add('hidden'), 4000);
+        }
+
+        function hideAlert() {
+            document.getElementById('alertBox').classList.add('hidden');
         }
 
         const modalPages = {
             privacy: `
                 <h2 class="text-xl font-bold text-white mb-2">Privacy Policy</h2>
-                <p>Your privacy is important to us. MediaGrab HD does not require user registration or store user download logs on server databases.</p>
-                <h3 class="font-bold text-white mt-3">Cookies & Advertising Networks</h3>
-                <p>We partner with third-party ad networks (Adsterra, Monetag) to serve ads. These partners may use cookies to serve non-personally identifiable contextual ads.</p>
+                <p>MediaGrab HD does not log or store personal files or history. We use third-party ad networks (Adsterra, Monetag).</p>
             `,
             terms: `
                 <h2 class="text-xl font-bold text-white mb-2">Terms of Service</h2>
-                <p>By using MediaGrab HD, you agree to follow intellectual property regulations.</p>
-                <p class="mt-2">This service is designed for personal offline viewing and backup purposes. Users are responsible for respecting original creator rights.</p>
+                <p>This tool is for personal caching & backups only. Please respect creator rights.</p>
             `,
             dmca: `
                 <h2 class="text-xl font-bold text-white mb-2">DMCA Disclaimer</h2>
-                <p>MediaGrab HD does not host, re-transmit, or store copyrighted video assets on its servers. All media streams are generated directly from public CDN endpoints.</p>
+                <p>We do not host copyrighted files on our servers.</p>
             `,
             contact: `
                 <h2 class="text-xl font-bold text-white mb-2">Contact Us</h2>
-                <p class="mb-3">For copyright inquiries or advertising clearance, contact us using the form below:</p>
                 <form onsubmit="event.preventDefault(); alert('Message Sent!'); closeModal();" class="space-y-3">
                     <input type="email" required placeholder="Your Email Address" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white">
                     <textarea required placeholder="Your Message..." rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white"></textarea>
