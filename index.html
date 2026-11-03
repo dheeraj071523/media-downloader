@@ -8,13 +8,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- ================================================================= -->
-    <!-- ADSTERRA: POPUNDER SCRIPT                                         -->
+    <!-- MONETAG MULTITAG / EPIC TAG SCRIPT                                -->
     <!-- ================================================================= -->
-    <script data-cfasync="false" src="https://accountut.com/1/4fe3c84e2a9bfffd395312da930abf12"></script>
+    <script src="https://quge5.com/88/tag.min.js" data-zone="305492" async data-cfasync="false"></script>
 
     <!-- ================================================================= -->
-    <!-- ADSTERRA: SOCIAL BAR SCRIPT                                       -->
+    <!-- ADSTERRA: POPUNDER & SOCIAL BAR SCRIPTS                           -->
     <!-- ================================================================= -->
+    <script data-cfasync="false" src="https://accountut.com/1/4fe3c84e2a9bfffd395312da930abf12"></script>
     <script data-cfasync="false" src="https://bellnewyork.org/14/7224564ca82561641ad610a6932e8f54"></script>
 
     <script>
@@ -30,7 +31,6 @@
             }
         }
     </script>
-    <script src="https://quge5.com/88/tag.min.js" data-zone="305492" async data-cfasync="false"></script>
 </head>
 <body class="bg-darkBg text-slate-100 min-h-screen flex flex-col font-sans">
 
@@ -55,11 +55,8 @@
     <!-- Main Container -->
     <main class="flex-grow max-w-4xl mx-auto w-full px-4 py-8">
 
-        <!-- ================================================================= -->
-        <!-- ADSTERRA: TOP DESKTOP BANNER (728x90) & MOBILE BANNER (320x50)    -->
-        <!-- ================================================================= -->
+        <!-- Top Banner Ads -->
         <div class="w-full my-4 flex flex-col items-center justify-center gap-4 overflow-hidden">
-            <!-- 728x90 Desktop Banner -->
             <div class="hidden sm:block">
                 <script>
                     atOptions = {
@@ -72,8 +69,6 @@
                 </script>
                 <script src="https://bellnewyork.org/22/d3463af2df2eba62b993df8f943909b2"></script>
             </div>
-
-            <!-- 320x50 Mobile Banner -->
             <div class="block sm:hidden">
                 <script>
                     atOptions = {
@@ -100,10 +95,9 @@
             </div>
         </div>
 
-        <!-- Layout Grid with Side Skyscraper Banner -->
+        <!-- Layout Grid -->
         <div class="flex flex-col lg:flex-row gap-6 items-start">
             
-            <!-- Left/Center Main Content Column -->
             <div class="flex-1 w-full">
                 <!-- Input Box Section -->
                 <div class="bg-cardBg p-4 sm:p-6 rounded-2xl shadow-xl border border-slate-800 mb-6">
@@ -127,7 +121,6 @@
                 <div id="resultCard" class="hidden bg-cardBg p-6 rounded-2xl border border-slate-800 shadow-xl mb-8">
                     <div class="flex flex-col md:flex-row gap-6">
                         
-                        <!-- Thumbnail Preview & Download -->
                         <div class="w-full md:w-1/3 flex flex-col gap-3">
                             <img id="mediaThumbnail" src="" alt="Thumbnail Preview" class="w-full h-48 object-cover rounded-xl border border-slate-700 shadow-md">
                             
@@ -136,7 +129,6 @@
                             </a>
                         </div>
 
-                        <!-- Title, Caption & Downloads -->
                         <div class="w-full md:w-2/3 flex flex-col justify-between space-y-4">
                             <div>
                                 <div class="flex items-start justify-between gap-2 mb-2">
@@ -172,17 +164,13 @@
                     </div>
                 </div>
 
-                <!-- ================================================================= -->
-                <!-- ADSTERRA: NATIVE BANNER & SQUARE BANNER (300x250 / 468x60)        -->
-                <!-- ================================================================= -->
+                <!-- Adsterra Native & Square Banner -->
                 <div class="w-full my-6 flex flex-col items-center justify-center gap-4">
-                    <!-- Native Banner Widget -->
                     <div class="w-full">
                         <script async="async" data-cfasync="false" src="https://bellnewyork.org/21/a5ea3d4006861be2d6b5c085b9a98cd8"></script>
                         <div id="container-a5ea3d4006861be2d6b5c085b9a98cd8"></div>
                     </div>
 
-                    <!-- 300x250 Banner -->
                     <div>
                         <script>
                             atOptions = {
@@ -199,9 +187,8 @@
 
             </div>
 
-            <!-- Right Sidebar Column for Skyscraper Banners (160x600 & 160x300) -->
+            <!-- Sidebar Banners -->
             <div class="hidden lg:flex flex-col gap-4 shrink-0">
-                <!-- 160x600 Skyscraper Banner -->
                 <div>
                     <script>
                         atOptions = {
@@ -215,7 +202,6 @@
                     <script src="https://bellnewyork.org/22/594a4a6a0b5ea42229ca63b05d63282b"></script>
                 </div>
 
-                <!-- 160x300 Banner -->
                 <div>
                     <script>
                         atOptions = {
@@ -247,23 +233,18 @@
         </div>
     </footer>
 
-    <!-- Universal Modal for Policy Pages -->
+    <!-- Policy Modal -->
     <div id="complianceModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-cardBg border border-slate-700 w-full max-w-2xl rounded-2xl p-6 relative max-h-[85vh] overflow-y-auto">
             <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <div id="modalContent" class="text-slate-300 text-sm space-y-4">
-                <!-- Dynamic Content -->
-            </div>
+            <div id="modalContent" class="text-slate-300 text-sm space-y-4"></div>
         </div>
     </div>
 
     <!-- Application JavaScript Logic -->
     <script>
-        // =====================================================================
-        // ADSTERRA SMARTLINK URL (Integrated from your input)
-        // =====================================================================
         const ADSTERRA_SMARTLINK = "https://ardance.org/4/325898d389dde0628cb663bc9622c1ca";
 
         function triggerSmartlink() {
@@ -272,7 +253,6 @@
             }
         }
 
-        // Live Cobalt Media Fetching Logic
         async function fetchMedia() {
             const urlInput = document.getElementById('videoUrl').value.trim();
             if (!urlInput) {
@@ -280,7 +260,6 @@
                 return;
             }
 
-            // Click action par Smartlink ad open hoga
             triggerSmartlink();
 
             const loader = document.getElementById('loader');
@@ -355,7 +334,7 @@
                 <h2 class="text-xl font-bold text-white mb-2">Privacy Policy</h2>
                 <p>Your privacy is important to us. MediaGrab HD does not require user registration or store user download logs on server databases.</p>
                 <h3 class="font-bold text-white mt-3">Cookies & Advertising Networks</h3>
-                <p>We partner with third-party ad networks (Adsterra) to serve ads. These partners may use cookies to serve non-personally identifiable contextual ads.</p>
+                <p>We partner with third-party ad networks (Adsterra, Monetag) to serve ads. These partners may use cookies to serve non-personally identifiable contextual ads.</p>
             `,
             terms: `
                 <h2 class="text-xl font-bold text-white mb-2">Terms of Service</h2>
