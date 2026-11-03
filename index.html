@@ -257,10 +257,14 @@
         let currentExtractedData = { thumb: '', title: '', caption: '', rawUrl: '' };
 
         function triggerSmartlink() {
-            if (ADSTERRA_SMARTLINK) {
-                window.open(ADSTERRA_SMARTLINK, '_blank');
-            }
+    try {
+        if (typeof ADSTERRA_SMARTLINK !== 'undefined' && ADSTERRA_SMARTLINK) {
+            window.open(ADSTERRA_SMARTLINK, '_blank');
         }
+    } catch (e) {
+        console.warn("Ad trigger blocked or disconnected, continuing media operation.");
+    }
+}
 
         async function fetchMedia() {
             const rawUrl = document.getElementById('videoUrl').value.trim();
